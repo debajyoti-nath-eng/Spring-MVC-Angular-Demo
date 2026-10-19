@@ -1,0 +1,137 @@
+<main class="page-shell">
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">PEOPLE DIRECTORY</p>
+      <h1>Meet your team.</h1>
+      <p class="subtitle">A simple employee directory powered by Spring MVC and Angular.</p>
+    </div>
+    <div class="hero-stat" aria-label="Employee count">
+      <span class="stat-number">{{ employees().length }}</span>
+      <span class="stat-label">TEAM MEMBERS</span>
+    </div>
+  </header>
+
+  @if (error()) {
+    <div class="alert" role="alert">
+      <span>{{ error() }}</span>
+      <button class="alert-close" type="button" aria-label="Dismiss error" (click)="error.set('')">×</button>
+    </div>
+  }
+
+  <section class="workspace" aria-label="Employee management">
+    <section class="directory panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE DIRECTORY</p>
+          <h2>Employees</h2>
+        </div>
+        <button class="text-button" type="button" (click)="loadEmployees()" [disabled]="loading()">
+          {{ loading() ? 'Refreshing…' : '↻ Refresh' }}
+        </button>
+      </div>
+
+      @if (loading()) {
+        <div class="empty-state" role="status">Loading employees…</div>
+      } @else if (employees().length === 0) {
+        <div class="empty-state">
+          <span class="empty-icon">✳</span>
+          <strong>Your directory is ready for its first member.</strong>
+          <span>Add an employee using the form.</span>
+        </div>
+      } @else {
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">NAME</th>
+                <th scope="col">DEPARTMENT</th>
+                <th scope="col">SALARY</th>
+                <th scope="col"><span class="visually-hidden">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (employee of employees(); track employee.id) {
+                <tr>
+                  <td>
+                    <div class="person">
+                      <span class="avatar">{{ employee.firstName.charAt(0) }}{{ employee.lastName.charAt(0) }}</span>
+                      <span class="person-details">
+                        <strong>{{ employee.firstName }} {{ employee.lastName }}</strong>
+                        <span>{{ employee.email }}</span>
+                      </span>
+                    </div>
+                  </td>
+                  <td><span class="department">{{ employee.department }}</span></td>
+                  <td class="salary">{{ employee.salary | currency: 'USD' : 'symbol' : '1.0-0' }}</td>
+                  <td>
+                    <div class="row-actions">
+                      <button class="icon-button" type="button" [attr.aria-label]="'Edit ' + employee.firstName"
+                        (click)="edit(employee)">Edit</button>
+                      <button class="icon-button danger" type="button" [attr.aria-label]="'Delete ' + employee.firstName"
+                        (click)="deleteEmployee(employee)">Delete</button>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+
+    <aside class="form-card panel">
+      <div class="form-heading">
+        <p class="eyebrow">{{ editingId() === null ? 'GROW THE TEAM' : 'UPDATE DETAILS' }}</p>
+        <h2>{{ editingId() === null ? 'Add an employee' : 'Edit employee' }}</h2>
+        <p>{{ editingId() === null ? 'Add someone new to your directory.' : 'Keep their information up to date.' }}</p>
+      </div>
+
+      <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()" novalidate>
+        <div class="name-fields">
+          <label>
+            First name
+            <input type="text" formControlName="firstName" autocomplete="given-name" placeholder="e.g. Alex">
+            @if (fieldInvalid('firstName')) { <span class="field-error">Enter a first name (up to 80 characters).</span> }
+          </label>
+          <label>
+            Last name
+            <input type="text" formControlName="lastName" autocomplete="family-name" placeholder="e.g. Morgan">
+            @if (fieldInvalid('lastName')) { <span class="field-error">Enter a last name (up to 80 characters).</span> }
+          </label>
+        </div>
+
+        <label>
+          Work email
+          <input type="email" formControlName="email" autocomplete="email" placeholder="alex@company.com">
+          @if (fieldInvalid('email')) { <span class="field-error">Enter a valid work email.</span> }
+        </label>
+
+        <label>
+          Department
+          <input type="text" formControlName="department" placeholder="e.g. Engineering">
+          @if (fieldInvalid('department')) { <span class="field-error">Enter a department.</span> }
+        </label>
+
+        <label>
+          Annual salary <span class="label-hint">USD</span>
+          <div class="salary-input">
+            <span aria-hidden="true">$</span>
+            <input type="number" formControlName="salary" min="0" step="1000" placeholder="85000">
+          </div>
+          @if (fieldInvalid('salary')) { <span class="field-error">Salary must be zero or greater.</span> }
+        </label>
+
+        <div class="form-actions">
+          @if (editingId() !== null) {
+            <button class="button secondary" type="button" (click)="cancelEdit()">Cancel</button>
+          }
+          <button class="button primary" type="submit" [disabled]="saving()">
+            {{ saving() ? 'Saving…' : editingId() === null ? 'Add employee' : 'Save changes' }}
+          </button>
+        </div>
+      </form>
+    </aside>
+  </section>
+
+  <footer>Built with <strong>Spring MVC</strong> · <strong>Angular</strong> · REST</footer>
+</main>
