@@ -16,8 +16,8 @@
 	<url>https://github.com/debajyoti-nath-eng/Spring-MVC-Angular-Demo</url>
 	<licenses>
 		<license>
-			<name>GNU General Public License v3.0 or later</name>
-			<url>https://www.gnu.org/licenses/gpl-3.0.html</url>
+			<name>MIT License</name>
+			<url>https://opensource.org/license/mit/</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
