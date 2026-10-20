@@ -62,3 +62,8 @@ cd backend
 cd frontend
 npm run build
 ```
+
+## License
+
+Copyright (C) 2026 [Debajyoti Nath](https://github.com/debajyoti-nath-eng).
+This project is licensed under the [GNU General Public License v3.0 or later](LICENSE).
