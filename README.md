@@ -66,4 +66,10 @@ npm run build
 ## License
 
 Copyright (C) 2026 [Debajyoti Nath](https://github.com/debajyoti-nath-eng).
-This project is licensed under the [GNU General Public License v3.0 or later](LICENSE).
+
+This project's original source code is licensed under the **GNU General Public
+License, version 3 or (at your option) any later version**. You may use,
+modify, and redistribute it under the terms of the [LICENSE](LICENSE).
+
+Third-party libraries and tools are subject to their own licenses; see their
+respective notices for details.
