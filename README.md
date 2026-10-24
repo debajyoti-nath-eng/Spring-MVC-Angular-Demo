@@ -65,10 +65,6 @@ npm run build
 
 ## License
 
-Copyright (C) 2026 [Debajyoti Nath](https://github.com/debajyoti-nath-eng).
-
-This repository is provided for viewing and cloning only. No permission is
-granted to use, reproduce, modify, distribute, or create derivative works
-from its contents. See [LICENSE](LICENSE) for the full terms.
-
-Third-party libraries and tools are subject to their respective licenses.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for
+the full license text. Third-party libraries and tools are subject to their
+respective licenses.
