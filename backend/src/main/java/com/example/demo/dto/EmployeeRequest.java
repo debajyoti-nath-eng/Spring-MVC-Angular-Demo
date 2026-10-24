@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.dto;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;

@@ -1,5 +1,8 @@
-package com.example.demo;
+package com.example.demo.controller;
 
+import com.example.demo.dto.EmployeeRequest;
+import com.example.demo.model.Employee;
+import com.example.demo.service.EmployeeService;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
